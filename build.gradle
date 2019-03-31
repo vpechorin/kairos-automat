@@ -113,6 +113,9 @@ artifacts {
     archives sourcesJar
 }
 
+def stUser = hasProperty('sonatypeUsername') ? sonatypeUsername : "anonymous"
+def stPass = hasProperty('sonatypePassword') ? sonatypePassword : "secret"
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -149,8 +152,8 @@ publishing {
         maven {
             url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
             credentials {
-                username sonatypeUsername
-                password sonatypePassword
+                username stUser
+                password stPass
             }
         }
     }
