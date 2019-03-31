@@ -1,4 +1,6 @@
-# Kairos Automat [![Build Status](https://travis-ci.com/vpechorin/kairos-automat.svg?branch=master)](https://travis-ci.com/vpechorin/kairos-automat) [![codecov](https://codecov.io/gh/vpechorin/kairos-automat/branch/master/graph/badge.svg)](https://codecov.io/gh/vpechorin/kairos-automat)
+# Kairos Automat
+==== 
+[![Build Status](https://travis-ci.com/vpechorin/kairos-automat.svg?branch=master)](https://travis-ci.com/vpechorin/kairos-automat) [![codecov](https://codecov.io/gh/vpechorin/kairos-automat/branch/master/graph/badge.svg)](https://codecov.io/gh/vpechorin/kairos-automat)
 
 Kairos Automat is a finite-state machine (FSM) library
 
@@ -85,7 +87,7 @@ Pull requests are welcome!
 
 ## License
 
-This project is licensed under the Apache License Version 2.0 - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the **Apache License Version 2.0** - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
