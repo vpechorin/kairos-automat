@@ -1,0 +1,7 @@
+/.classpath
+/.gradle
+/.idea/*/*
+/build
+/out
+*.iml
+.gradletasknamecache
