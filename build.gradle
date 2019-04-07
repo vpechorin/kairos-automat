@@ -30,7 +30,7 @@ repositories {
 group = 'net.pechorina.kairos.automat'
 scmVersion {
     tag {
-        prefix = 'kairo-automat'
+        prefix = 'kairos-automat'
     }
 }
 
@@ -108,6 +108,11 @@ task sourcesJar(type: Jar) {
     from sourceSets.main.allSource
 }
 
+task javadocJar(type: Jar) {
+    classifier = 'javadoc'
+    from javadoc
+}
+
 artifacts {
     archives jar
     archives sourcesJar
@@ -143,9 +148,8 @@ publishing {
                     url = 'https://github.com/vpechorin/kairos-automat'
                 }
             }
-            artifact sourcesJar {
-                classifier "sources"
-            }
+            artifact sourcesJar
+            artifact javadocJar
         }
     }
     repositories {

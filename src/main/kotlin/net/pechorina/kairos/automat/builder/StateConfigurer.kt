@@ -21,7 +21,7 @@ class StateConfigurer<S, E> {
         return this
     }
 
-    fun initial(state: S, exitAction: Action<S, E>): StateConfigurer<S, E> {
+    fun initial(state: S, exitAction: Action<S, E>?): StateConfigurer<S, E> {
         val existingState = findState(state)
         existingState?.let {
             it.initialState = true
@@ -50,7 +50,7 @@ class StateConfigurer<S, E> {
         return this
     }
 
-    fun end(state: S, entryAction: Action<S, E>): StateConfigurer<S, E> {
+    fun end(state: S, entryAction: Action<S, E>?): StateConfigurer<S, E> {
         val existingState = findState(state)
         existingState?.let {
             it.finalState = true
@@ -72,7 +72,7 @@ class StateConfigurer<S, E> {
         return this
     }
 
-    fun state(state: S, parent: S): StateConfigurer<S, E> {
+    fun state(state: S, parent: S?): StateConfigurer<S, E> {
         val existingState = findState(state)
         existingState?.let {
             it.parent = parent
@@ -82,7 +82,7 @@ class StateConfigurer<S, E> {
         return this
     }
 
-    fun state(state: S, parent: S, entryAction: Action<S, E>, exitAction: Action<S, E>): StateConfigurer<S, E> {
+    fun state(state: S, parent: S?, entryAction: Action<S, E>?, exitAction: Action<S, E>?): StateConfigurer<S, E> {
         val existingState = findState(state)
         existingState?.let {
             it.parent = parent
@@ -101,7 +101,7 @@ class StateConfigurer<S, E> {
         return this
     }
 
-    fun state(state: S, entryAction: Action<S, E>, exitAction: Action<S, E>): StateConfigurer<S, E> {
+    fun state(state: S, entryAction: Action<S, E>?, exitAction: Action<S, E>?): StateConfigurer<S, E> {
         val existingState = findState(state)
         existingState?.let {
             it.entryAction = entryAction
@@ -116,6 +116,37 @@ class StateConfigurer<S, E> {
             )
         return this
     }
+
+    fun state(
+            state: S,
+            parent: S?,
+            initialState: Boolean = true,
+            finalState: Boolean = true,
+            entryAction: Action<S, E>?,
+            exitAction: Action<S, E>?
+    ): StateConfigurer<S, E> {
+        val existingState = findState(state)
+        existingState?.let { stateConfig ->
+            entryAction?.let { stateConfig.entryAction = entryAction }
+            exitAction?.let { stateConfig.exitAction = exitAction }
+            parent?.let { stateConfig.parent = it }
+            existingState.initialState = initialState
+            existingState.finalState = finalState
+        }
+
+        if (existingState == null)
+            this.states.add(
+                    StateConfig(
+                            state = state,
+                            parent = parent,
+                            initialState = initialState,
+                            finalState = finalState,
+                            entryAction = entryAction,
+                            exitAction = exitAction)
+            )
+        return this
+    }
+
 
     fun stateEntry(state: S, entryAction: Action<S, E>): StateConfigurer<S, E> {
         val existingState = findState(state)

@@ -218,4 +218,41 @@ class EnumAutomatTest {
         assertThat(a.isRunning()).isFalse()
         assertThat(a.currentState()).isEqualTo("C")
     }
+
+    @Test
+    fun testConfigureState() {
+        val configurer = AutomatBuilder<String, String>()
+                .withConfig()
+                .enableLogging()
+
+        configurer
+                .configureStates()
+                .initial("A")
+                .state("B")
+                .state("B1", "B", false, false, {t,a -> }, null)
+                .end("C")
+
+        configurer.configureTransitions()
+                .withExternal()
+                .event("E1").source("A").target("B")
+                .and()
+                .withExternal()
+                .event("E2").source("B").target("B1")
+                .and()
+                .withExternal()
+                .event("E3").source("B").target("C")
+
+        val a = configurer.build()
+
+        a.start()
+
+        a.sendEvent("E1")
+        assertThat(a.currentState()).isEqualTo("B")
+        a.sendEvent("E2")
+        assertThat(a.currentState()).isEqualTo("B1")
+        a.sendEvent("E3")
+
+        assertThat(a.isRunning()).isFalse()
+        assertThat(a.currentState()).isEqualTo("C")
+    }
 }
