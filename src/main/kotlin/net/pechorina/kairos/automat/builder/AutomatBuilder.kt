@@ -35,9 +35,9 @@ class AutomatBuilder<S, E> {
 
         if (!hasInitialState()) throw RuntimeException("Initial state is not defined")
 
-        val machine: Automat<S, E> = SyncAutomat(states)
+        val machine: Automat<S, E> = SyncAutomat(states, configurer.id, configurer.name)
 
-        if (configurer.logging) machine.addListener(LoggingListener())
+        if (configurer.logging) machine.addListener(LoggingListener(machine))
 
         return machine
     }

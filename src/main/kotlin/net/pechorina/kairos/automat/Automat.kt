@@ -18,4 +18,7 @@ interface Automat<S, E> {
     fun stop()
     fun reset()
     fun isRunning(): Boolean
+
+    fun id(): String
+    fun name(): String?
 }

@@ -20,6 +20,8 @@ class EnumAutomatTest {
         val configurer = AutomatBuilder<States, Events>()
                 .withConfig()
                 .enableLogging()
+                .withId("123")
+                .withName("test1")
 
         configurer
                 .configureStates()
@@ -42,6 +44,8 @@ class EnumAutomatTest {
 
         val a = configurer.build()
 
+        assertThat(a.id()).isEqualTo("123")
+        assertThat(a.name()).isEqualTo("test1")
         assertThat(a.isRunning()).isFalse()
         a.start()
         assertThat(a.isRunning()).isTrue()

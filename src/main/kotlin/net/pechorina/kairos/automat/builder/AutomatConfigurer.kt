@@ -3,14 +3,27 @@ package net.pechorina.kairos.automat.builder
 import net.pechorina.kairos.automat.Automat
 import net.pechorina.kairos.automat.State
 import net.pechorina.kairos.automat.Transition
+import java.util.UUID
 
 class AutomatConfigurer<S, E>(val builder: AutomatBuilder<S, E>) {
     internal var logging: Boolean = false
+    internal var id: String = UUID.randomUUID().toString()
+    internal var name: String? = null
     private val stateConfigurer = StateConfigurer<S, E>()
     private val transitionConfigurer = TransitionConfigurer<S, E>()
 
     fun enableLogging(): AutomatConfigurer<S, E> {
         this.logging = true
+        return this
+    }
+
+    fun withId(id: String): AutomatConfigurer<S, E> {
+        this.id = id
+        return this
+    }
+
+    fun withName(name: String): AutomatConfigurer<S, E> {
+        this.name = name
         return this
     }
 

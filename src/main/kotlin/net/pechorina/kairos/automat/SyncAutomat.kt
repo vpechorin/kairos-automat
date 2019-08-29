@@ -2,11 +2,14 @@ package net.pechorina.kairos.automat
 
 import mu.KotlinLogging
 import net.pechorina.kairos.automat.listeners.AutomatListener
+import java.util.UUID
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
 class SyncAutomat<S, E>(
-        val states: Set<State<S, E>>
+        val states: Set<State<S, E>>,
+        val id: String = UUID.randomUUID().toString(),
+        val name: String? = null
 ) : Automat<S, E> {
 
     private val current: AtomicReference<State<S, E>> = AtomicReference()
@@ -22,6 +25,14 @@ class SyncAutomat<S, E>(
         this.endStates = states.filter { it.finalState }.toSet()
         this.current.set(initial)
         this.extendedState = ExtendedState(this)
+    }
+
+    override fun id(): String {
+        return this.id
+    }
+
+    override fun name(): String? {
+        return this.name
     }
 
     override fun start() {

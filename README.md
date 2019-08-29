@@ -61,14 +61,14 @@ machine.stop()
 <dependency>
   <groupId>net.pechorina.kairos.automat</groupId>
   <artifactId>kairos-automat</artifactId>
-  <version>0.1.0</version>
+  <version>0.2.0</version>
 </dependency>
 ```
 
 
 #### Gradle
 ```
-compile 'net.pechorina.kairos.automat:kairo-automat:0.1.0'
+compile 'net.pechorina.kairos.automat:kairos-automat:0.2.0'
 ```
 
 ## Built With
